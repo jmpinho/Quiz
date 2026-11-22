@@ -1,0 +1,582 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Sans:wght@400;500;600&display=swap");
+
+/* ==========================================================================
+   Quiz — estilo Honkai: Star Rail (Hoyoverse)
+   Padrão: BEM (block__element--modifier)
+   Blocos: .page, .quiz
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Cores: espaço profundo, ouro dos Trilhos e brilho de nebulosa */
+  --color-space-950: #070914;
+  --color-space-900: #0d1126;
+  --color-space-800: #161b3a;
+  --color-nebula-500: #6b5bd2;
+  --color-gold-200: #f4e3b5;
+  --color-gold-400: #e6c27a;
+  --color-gold-600: #c79a45;
+  --color-cream-100: #f5efe0;
+  --color-mist-300: #b9bddb;
+  --color-cyan-300: #8fdcf0;
+  --color-mint-300: #6fe3c1;
+  --color-coral-300: #ff8a98;
+
+  /* Tipografia: display celestial + texto limpo */
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --font-body: "Noto Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Movimento */
+  --motion-fast: 0.2s;
+  --motion-base: 0.35s;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Block: page (body)
+   -------------------------------------------------------------------------- */
+.page {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-cream-100);
+  background-color: var(--color-space-950);
+  background-image:
+    /* estrelas */
+    radial-gradient(circle 1.5px at 12% 18%, rgba(245, 239, 224, 0.9), transparent),
+    radial-gradient(circle 1px at 27% 72%, rgba(245, 239, 224, 0.7), transparent),
+    radial-gradient(circle 1.5px at 44% 9%, rgba(244, 227, 181, 0.85), transparent),
+    radial-gradient(circle 1px at 63% 38%, rgba(245, 239, 224, 0.6), transparent),
+    radial-gradient(circle 2px at 81% 22%, rgba(143, 220, 240, 0.8), transparent),
+    radial-gradient(circle 1px at 90% 80%, rgba(245, 239, 224, 0.7), transparent),
+    radial-gradient(circle 1.5px at 7% 91%, rgba(244, 227, 181, 0.8), transparent),
+    radial-gradient(circle 1px at 55% 88%, rgba(245, 239, 224, 0.6), transparent),
+    /* nebulosa */
+    radial-gradient(60rem 40rem at 10% -5%, rgba(107, 91, 210, 0.38), transparent 60%),
+    radial-gradient(50rem 36rem at 105% 105%, rgba(143, 220, 240, 0.14), transparent 60%),
+    linear-gradient(180deg, #0a0d20 0%, var(--color-space-950) 100%);
+  background-attachment: fixed;
+}
+
+/* --------------------------------------------------------------------------
+   Block: quiz
+   Cartão com bordas chanfradas (TL e BR) e linha dourada
+   -------------------------------------------------------------------------- */
+.quiz {
+  --quiz-cut: 1.25rem;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 42rem;
+  padding: clamp(1.5rem, 5vw, 2.75rem);
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-400),
+    rgba(230, 194, 122, 0.25) 45%,
+    rgba(143, 220, 240, 0.55)
+  );
+  clip-path: polygon(
+    var(--quiz-cut) 0,
+    100% 0,
+    100% calc(100% - var(--quiz-cut)),
+    calc(100% - var(--quiz-cut)) 100%,
+    0 100%,
+    0 var(--quiz-cut)
+  );
+  animation: quiz-arrive 0.7s var(--motion-ease) both;
+}
+
+/* Superfície interna: deixa 1.5px de borda dourada visível */
+.quiz::before {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  z-index: -1;
+  background: linear-gradient(160deg, #1a2048 0%, #0f1330 60%, #0c0f26 100%);
+  clip-path: polygon(
+    calc(var(--quiz-cut) - 0.9px) 0,
+    100% 0,
+    100% calc(100% - var(--quiz-cut) + 0.9px),
+    calc(100% - var(--quiz-cut) + 0.9px) 100%,
+    0 100%,
+    0 calc(var(--quiz-cut) - 0.9px)
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Element: quiz__title
+   -------------------------------------------------------------------------- */
+.quiz__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 7vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--color-gold-200);
+  background: linear-gradient(180deg, var(--color-cream-100), var(--color-gold-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Estrela de quatro pontas, marca visual do jogo */
+.quiz__title::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0 auto 0.75rem;
+  background: linear-gradient(135deg, var(--color-gold-200), var(--color-gold-600));
+  -webkit-text-fill-color: initial;
+  clip-path: polygon(
+    50% 0,
+    62% 38%,
+    100% 50%,
+    62% 62%,
+    50% 100%,
+    38% 62%,
+    0 50%,
+    38% 38%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Element: quiz__subtitle
+   -------------------------------------------------------------------------- */
+.quiz__subtitle {
+  max-width: 34ch;
+  margin: -0.75rem 0 0;
+  font-size: 1.0625rem;
+  text-align: center;
+  color: var(--color-mist-300);
+}
+
+/* --------------------------------------------------------------------------
+   Elements: quiz__scoreboard / quiz__score / quiz__score-value
+   -------------------------------------------------------------------------- */
+.quiz__scoreboard {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  background: linear-gradient(90deg, rgba(230, 194, 122, 0.18), transparent);
+  border-left: 3px solid var(--color-gold-400);
+}
+
+.quiz__score {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin: 0;
+  font-weight: 500;
+  color: var(--color-mist-300);
+}
+
+.quiz__score-value {
+  display: inline-block;
+  min-width: 2ch;
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  color: var(--color-gold-200);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Modificador: usado pelo JS ao pontuar */
+.quiz__score-value--bump {
+  animation: quiz-score-bump 0.45s var(--motion-ease);
+}
+
+/* --------------------------------------------------------------------------
+   Element: quiz__start
+   Botão principal dourado com cantos chanfrados
+   -------------------------------------------------------------------------- */
+.quiz__start {
+  --start-cut: 0.875rem;
+
+  box-sizing: border-box;
+  min-height: 3.25rem;
+  margin: 0;
+  padding: 0.75rem 2.75rem;
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #1a1530;
+  background: linear-gradient(
+    180deg,
+    var(--color-gold-200) 0%,
+    var(--color-gold-400) 60%,
+    var(--color-gold-600) 100%
+  );
+  border: 0;
+  cursor: pointer;
+  clip-path: polygon(
+    var(--start-cut) 0,
+    100% 0,
+    100% calc(100% - var(--start-cut)),
+    calc(100% - var(--start-cut)) 100%,
+    0 100%,
+    0 var(--start-cut)
+  );
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    filter var(--motion-fast) var(--motion-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.quiz__start:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.quiz__start:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
+}
+
+/* Anel interno: o clip-path cortaria um outline externo */
+.quiz__start:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 3px var(--color-space-900),
+    inset 0 0 0 5px var(--color-cream-100);
+}
+
+/* Modificadores de saída */
+.quiz__start--leaving {
+  pointer-events: none;
+  animation: quiz-fade-out var(--motion-base) var(--motion-ease) forwards;
+}
+
+.quiz__start--hidden,
+.quiz__start[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Element: quiz__question
+   Grade 2 colunas: número e enunciado ocupam a linha toda
+   -------------------------------------------------------------------------- */
+.quiz__question {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  margin: 0;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: rgba(7, 9, 20, 0.5);
+  border: 1px solid rgba(230, 194, 122, 0.22);
+}
+
+.quiz__question-number {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-bottom: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-gold-400);
+  border-bottom: 1px solid rgba(230, 194, 122, 0.3);
+}
+
+.quiz__question-text {
+  grid-column: 1 / -1;
+  max-width: 60ch;
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.125rem, 2.8vw, 1.3125rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--color-cream-100);
+}
+
+/* Modificadores de entrada e saída entre questões */
+.quiz__question--entering {
+  animation: quiz-slide-in var(--motion-base) var(--motion-ease) both;
+}
+
+.quiz__question--leaving {
+  pointer-events: none;
+  animation: quiz-slide-out var(--motion-base) var(--motion-ease) forwards;
+}
+
+.quiz__question--hidden,
+.quiz__question[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Element: quiz__option
+   Alternativa no estilo de escolha de diálogo do jogo
+   -------------------------------------------------------------------------- */
+.quiz__option {
+  --option-cut: 0.75rem;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  width: 100%;
+  min-height: 3.5rem;
+  margin: 0;
+  padding: 0.75rem 1.25rem 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  color: var(--color-cream-100);
+  background-color: rgba(22, 27, 58, 0.92);
+  border: 0;
+  border-left: 3px solid rgba(230, 194, 122, 0.5);
+  cursor: pointer;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--option-cut)) 0,
+    100% var(--option-cut),
+    100% 100%,
+    0 100%
+  );
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Losango marcador */
+.quiz__option::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-gold-400);
+  transform: rotate(45deg);
+  transition:
+    transform var(--motion-fast) var(--motion-ease),
+    background-color var(--motion-fast) var(--motion-ease);
+}
+
+/* Brilho de seleção por trás do texto */
+.quiz__option::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(230, 194, 122, 0.26),
+    rgba(107, 91, 210, 0.14) 55%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--motion-ease);
+}
+
+/* Interação: :where mantém a especificidade baixa para os modificadores vencerem */
+@media (hover: hover) {
+  .quiz__option:where(:hover:not(:disabled, .quiz__option--disabled)) {
+    transform: translateX(0.25rem);
+    border-left-color: var(--color-gold-200);
+  }
+
+  .quiz__option:where(:hover:not(:disabled, .quiz__option--disabled))::before {
+    transform: rotate(45deg) scale(1.5);
+  }
+
+  .quiz__option:where(:hover:not(:disabled, .quiz__option--disabled))::after {
+    opacity: 1;
+  }
+}
+
+.quiz__option:where(:active:not(:disabled, .quiz__option--disabled)) {
+  transform: translateX(0.125rem);
+}
+
+/* Anel interno: o clip-path cortaria um outline externo */
+.quiz__option:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-gold-200);
+}
+
+.quiz__option:focus-visible::after {
+  opacity: 1;
+}
+
+/* Modificador: alternativa escolhida, antes do resultado */
+.quiz__option--selected {
+  border-left-color: var(--color-cyan-300);
+}
+
+.quiz__option--selected::before {
+  background-color: var(--color-cyan-300);
+  transform: rotate(45deg) scale(1.5);
+}
+
+.quiz__option--selected::after {
+  background: linear-gradient(90deg, rgba(143, 220, 240, 0.25), transparent 70%);
+  opacity: 1;
+}
+
+/* Modificador: alternativas bloqueadas depois de responder */
+.quiz__option--disabled,
+.quiz__option:where(:disabled) {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* Modificador: resposta correta (ícone reforça a cor) */
+.quiz__option--correct {
+  background-color: #10332f;
+  border-left-color: var(--color-mint-300);
+  opacity: 1;
+}
+
+.quiz__option--correct::before {
+  content: "\2713";
+  width: auto;
+  height: auto;
+  font-weight: 700;
+  color: var(--color-mint-300);
+  background-color: transparent;
+  transform: none;
+}
+
+.quiz__option--correct::after {
+  background: linear-gradient(90deg, rgba(111, 227, 193, 0.2), transparent 70%);
+  opacity: 1;
+}
+
+/* Modificador: resposta incorreta */
+.quiz__option--incorrect {
+  background-color: #3a1a2b;
+  border-left-color: var(--color-coral-300);
+  opacity: 1;
+}
+
+.quiz__option--incorrect::before {
+  content: "\2715";
+  width: auto;
+  height: auto;
+  font-weight: 700;
+  color: var(--color-coral-300);
+  background-color: transparent;
+  transform: none;
+}
+
+.quiz__option--incorrect::after {
+  background: linear-gradient(90deg, rgba(255, 138, 152, 0.2), transparent 70%);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Animações
+   -------------------------------------------------------------------------- */
+@keyframes quiz-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes quiz-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes quiz-slide-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+}
+
+@keyframes quiz-fade-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes quiz-score-bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.4);
+    color: var(--color-cream-100);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsivo
+   -------------------------------------------------------------------------- */
+@media (max-width: 36rem) {
+  .quiz__question {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz__start {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Movimento reduzido: mantém a duração mínima para que eventos
+   animationend/transitionend continuem disparando
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .quiz,
+  .quiz__start,
+  .quiz__question,
+  .quiz__option,
+  .quiz__option::before,
+  .quiz__option::after,
+  .quiz__score-value {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+}
