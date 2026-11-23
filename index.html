@@ -16,7 +16,7 @@
         </p>
       </div>
       <button class="quiz__start" id="start-quiz">Iniciar Quiz</button>
-      <div class="quiz__question" id="question-1">
+      <form class="quiz__question quiz__question--hidden" id="question-1">
         <p class="quiz__question-number">Questão 1</p>
         <p class="quiz__question-text">
           Qual Aeon percorreu o universo conectando mundos através dos Trilhos
@@ -26,8 +26,8 @@
         <button class="quiz__option">Akivili</button>
         <button class="quiz__option">Fuli</button>
         <button class="quiz__option">Ena</button>
-      </div>
-      <div class="quiz__question" id="question-2">
+      </form>
+      <form class="quiz__question quiz__question--hidden" id="question-2">
         <p class="quiz__question-number">Questão 2</p>
         <p class="quiz__question-text">
           Qual Aeon percorreu o universo conectando mundos através dos Trilhos
@@ -37,8 +37,8 @@
         <button class="quiz__option">Akivili</button>
         <button class="quiz__option">Fuli</button>
         <button class="quiz__option">Ena</button>
-      </div>
-      <div class="quiz__question" id="question-3">
+      </form>
+      <form class="quiz__question quiz__question--hidden" id="question-3">
         <p class="quiz__question-number">Questão 3</p>
         <p class="quiz__question-text">
           Qual Aeon percorreu o universo conectando mundos através dos Trilhos
@@ -48,8 +48,12 @@
         <button class="quiz__option">Akivili</button>
         <button class="quiz__option">Fuli</button>
         <button class="quiz__option">Ena</button>
-      </div>
-      <button class="quiz__start finish" id="start-quiz finish">
+      </form>
+      <button
+        class="quiz__start quiz__start--finish quiz__start--hidden"
+        id="finish-quiz"
+        type="button"
+      >
         Finalizar Quiz
       </button>
     </main>

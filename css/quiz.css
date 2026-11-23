@@ -51,18 +51,57 @@
   color: var(--color-cream-100);
   background-color: var(--color-space-950);
   background-image:
-    /* estrelas */
-    radial-gradient(circle 1.5px at 12% 18%, rgba(245, 239, 224, 0.9), transparent),
-    radial-gradient(circle 1px at 27% 72%, rgba(245, 239, 224, 0.7), transparent),
-    radial-gradient(circle 1.5px at 44% 9%, rgba(244, 227, 181, 0.85), transparent),
-    radial-gradient(circle 1px at 63% 38%, rgba(245, 239, 224, 0.6), transparent),
-    radial-gradient(circle 2px at 81% 22%, rgba(143, 220, 240, 0.8), transparent),
-    radial-gradient(circle 1px at 90% 80%, rgba(245, 239, 224, 0.7), transparent),
-    radial-gradient(circle 1.5px at 7% 91%, rgba(244, 227, 181, 0.8), transparent),
-    radial-gradient(circle 1px at 55% 88%, rgba(245, 239, 224, 0.6), transparent),
+    /* estrelas */ radial-gradient(
+      circle 1.5px at 12% 18%,
+      rgba(245, 239, 224, 0.9),
+      transparent
+    ),
+    radial-gradient(
+      circle 1px at 27% 72%,
+      rgba(245, 239, 224, 0.7),
+      transparent
+    ),
+    radial-gradient(
+      circle 1.5px at 44% 9%,
+      rgba(244, 227, 181, 0.85),
+      transparent
+    ),
+    radial-gradient(
+      circle 1px at 63% 38%,
+      rgba(245, 239, 224, 0.6),
+      transparent
+    ),
+    radial-gradient(
+      circle 2px at 81% 22%,
+      rgba(143, 220, 240, 0.8),
+      transparent
+    ),
+    radial-gradient(
+      circle 1px at 90% 80%,
+      rgba(245, 239, 224, 0.7),
+      transparent
+    ),
+    radial-gradient(
+      circle 1.5px at 7% 91%,
+      rgba(244, 227, 181, 0.8),
+      transparent
+    ),
+    radial-gradient(
+      circle 1px at 55% 88%,
+      rgba(245, 239, 224, 0.6),
+      transparent
+    ),
     /* nebulosa */
-    radial-gradient(60rem 40rem at 10% -5%, rgba(107, 91, 210, 0.38), transparent 60%),
-    radial-gradient(50rem 36rem at 105% 105%, rgba(143, 220, 240, 0.14), transparent 60%),
+      radial-gradient(
+        60rem 40rem at 10% -5%,
+        rgba(107, 91, 210, 0.38),
+        transparent 60%
+      ),
+    radial-gradient(
+      50rem 36rem at 105% 105%,
+      rgba(143, 220, 240, 0.14),
+      transparent 60%
+    ),
     linear-gradient(180deg, #0a0d20 0%, var(--color-space-950) 100%);
   background-attachment: fixed;
 }
@@ -130,7 +169,11 @@
   letter-spacing: 0.06em;
   text-align: center;
   color: var(--color-gold-200);
-  background: linear-gradient(180deg, var(--color-cream-100), var(--color-gold-400));
+  background: linear-gradient(
+    180deg,
+    var(--color-cream-100),
+    var(--color-gold-400)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -143,7 +186,11 @@
   width: 1.5rem;
   height: 1.5rem;
   margin: 0 auto 0.75rem;
-  background: linear-gradient(135deg, var(--color-gold-200), var(--color-gold-600));
+  background: linear-gradient(
+    135deg,
+    var(--color-gold-200),
+    var(--color-gold-600)
+  );
   -webkit-text-fill-color: initial;
   clip-path: polygon(
     50% 0,
@@ -238,18 +285,18 @@
     0 100%,
     0 var(--start-cut)
   );
-  transition:
-    transform var(--motion-fast) var(--motion-ease),
+  transition: transform var(--motion-fast) var(--motion-ease),
     filter var(--motion-fast) var(--motion-ease);
   -webkit-tap-highlight-color: transparent;
 }
 
-.quiz__start:hover {
+/* :where mantém a especificidade baixa para os modificadores vencerem */
+.quiz__start:where(:hover:not(:disabled, .quiz__start--disabled)) {
   transform: translateY(-2px);
   filter: brightness(1.08);
 }
 
-.quiz__start:active {
+.quiz__start:where(:active:not(:disabled, .quiz__start--disabled)) {
   transform: translateY(0);
   filter: brightness(0.96);
 }
@@ -257,8 +304,7 @@
 /* Anel interno: o clip-path cortaria um outline externo */
 .quiz__start:focus-visible {
   outline: none;
-  box-shadow:
-    inset 0 0 0 3px var(--color-space-900),
+  box-shadow: inset 0 0 0 3px var(--color-space-900),
     inset 0 0 0 5px var(--color-cream-100);
 }
 
@@ -269,8 +315,28 @@
 }
 
 .quiz__start--hidden,
+.quiz__scoreboard,
 .quiz__start[hidden] {
   display: none;
+}
+
+/* Modificador: variação para finalizar. É opcional, pois a base
+   .quiz__start já serve para iniciar e finalizar */
+.quiz__start--finish {
+  background: linear-gradient(
+    180deg,
+    #d9f4fb 0%,
+    var(--color-cyan-300) 60%,
+    #5bb6cf 100%
+  );
+}
+
+/* Modificador: desabilitado (vale para iniciar e finalizar) */
+.quiz__start--disabled,
+.quiz__start:where(:disabled) {
+  cursor: not-allowed;
+  opacity: 0.6;
+  filter: grayscale(0.85) brightness(0.8);
 }
 
 /* --------------------------------------------------------------------------
@@ -358,8 +424,7 @@
     100% 100%,
     0 100%
   );
-  transition:
-    transform var(--motion-fast) var(--motion-ease),
+  transition: transform var(--motion-fast) var(--motion-ease),
     background-color var(--motion-fast) var(--motion-ease),
     border-color var(--motion-fast) var(--motion-ease);
   -webkit-tap-highlight-color: transparent;
@@ -373,8 +438,7 @@
   height: 0.5rem;
   background-color: var(--color-gold-400);
   transform: rotate(45deg);
-  transition:
-    transform var(--motion-fast) var(--motion-ease),
+  transition: transform var(--motion-fast) var(--motion-ease),
     background-color var(--motion-fast) var(--motion-ease);
 }
 
@@ -435,15 +499,25 @@
 }
 
 .quiz__option--selected::after {
-  background: linear-gradient(90deg, rgba(143, 220, 240, 0.25), transparent 70%);
+  background: linear-gradient(
+    90deg,
+    rgba(143, 220, 240, 0.25),
+    transparent 70%
+  );
   opacity: 1;
 }
 
 /* Modificador: alternativas bloqueadas depois de responder */
 .quiz__option--disabled,
 .quiz__option:where(:disabled) {
-  cursor: default;
+  cursor: not-allowed;
   opacity: 0.55;
+  border-left-color: rgba(185, 189, 219, 0.35);
+}
+
+.quiz__option--disabled::before,
+.quiz__option:where(:disabled)::before {
+  background-color: var(--color-mist-300);
 }
 
 /* Modificador: resposta correta (ícone reforça a cor) */
@@ -451,6 +525,8 @@
   background-color: #10332f;
   border-left-color: var(--color-mint-300);
   opacity: 1;
+  cursor: default;
+  animation: quiz-correct-pulse 0.6s var(--motion-ease);
 }
 
 .quiz__option--correct::before {
@@ -473,6 +549,8 @@
   background-color: #3a1a2b;
   border-left-color: var(--color-coral-300);
   opacity: 1;
+  cursor: default;
+  animation: quiz-incorrect-shake 0.4s var(--motion-ease);
 }
 
 .quiz__option--incorrect::before {
@@ -488,6 +566,47 @@
 .quiz__option--incorrect::after {
   background: linear-gradient(90deg, rgba(255, 138, 152, 0.2), transparent 70%);
   opacity: 1;
+}
+
+/* Certa e errada com o botão desabilitado (atributo disabled ou --disabled).
+   Especificidade maior que a do estado desabilitado, então vencem sempre,
+   independentemente da ordem das regras. */
+.quiz__option--correct:disabled,
+.quiz__option--correct.quiz__option--disabled {
+  background-color: #10332f;
+  border-left-color: var(--color-mint-300);
+  opacity: 1;
+  cursor: default;
+}
+
+.quiz__option--correct:disabled::before,
+.quiz__option--correct.quiz__option--disabled::before {
+  content: "\2713";
+  width: auto;
+  height: auto;
+  font-weight: 700;
+  color: var(--color-mint-300);
+  background-color: transparent;
+  transform: none;
+}
+
+.quiz__option--incorrect:disabled,
+.quiz__option--incorrect.quiz__option--disabled {
+  background-color: #3a1a2b;
+  border-left-color: var(--color-coral-300);
+  opacity: 1;
+  cursor: default;
+}
+
+.quiz__option--incorrect:disabled::before,
+.quiz__option--incorrect.quiz__option--disabled::before {
+  content: "\2715";
+  width: auto;
+  height: auto;
+  font-weight: 700;
+  color: var(--color-coral-300);
+  background-color: transparent;
+  transform: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -534,6 +653,40 @@
   to {
     opacity: 0;
     transform: scale(0.96);
+  }
+}
+
+@keyframes quiz-correct-pulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  40% {
+    transform: scale(1.02);
+    filter: brightness(1.3);
+  }
+  100% {
+    transform: none;
+    filter: brightness(1);
+  }
+}
+
+@keyframes quiz-incorrect-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-0.375rem);
+  }
+  40% {
+    transform: translateX(0.375rem);
+  }
+  60% {
+    transform: translateX(-0.25rem);
+  }
+  80% {
+    transform: translateX(0.25rem);
   }
 }
 
