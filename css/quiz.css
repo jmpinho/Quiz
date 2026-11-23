@@ -315,7 +315,7 @@
 }
 
 .quiz__start--hidden,
-.quiz__scoreboard,
+.quiz__scoreboard--hidden,
 .quiz__start[hidden] {
   display: none;
 }

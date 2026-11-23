@@ -10,11 +10,6 @@
     <main class="quiz">
       <h1 class="quiz__title">Quiz</h1>
       <p class="quiz__subtitle">Teste seus conhecimentos com nosso quiz!</p>
-      <div class="quiz__scoreboard">
-        <p class="quiz__score">
-          Pontuação: <span class="quiz__score-value" id="score">0</span>
-        </p>
-      </div>
       <button class="quiz__start" id="start-quiz">Iniciar Quiz</button>
       <form class="quiz__question quiz__question--hidden" id="question-1">
         <p class="quiz__question-number">Questão 1</p>
@@ -23,32 +18,40 @@
           Estelares antes de desaparecer misteriosamente?
         </p>
         <button class="quiz__option">Nous</button>
-        <button class="quiz__option">Akivili</button>
+        <button class="quiz__option" data-correct>Akivili</button>
         <button class="quiz__option">Fuli</button>
         <button class="quiz__option">Ena</button>
       </form>
       <form class="quiz__question quiz__question--hidden" id="question-2">
         <p class="quiz__question-number">Questão 2</p>
         <p class="quiz__question-text">
-          Qual Aeon percorreu o universo conectando mundos através dos Trilhos
-          Estelares antes de desaparecer misteriosamente?
+          Qual Aeon concedeu a imortalidade aos habitantes do Xianzhou no
+          passado, gerando a maldição conhecida como Mara?
         </p>
-        <button class="quiz__option">Nous</button>
-        <button class="quiz__option">Akivili</button>
-        <button class="quiz__option">Fuli</button>
-        <button class="quiz__option">Ena</button>
+        <button class="quiz__option">Lan</button>
+        <button class="quiz__option">Tayzzyronth</button>
+        <button class="quiz__option">Ouroboros</button>
+        <button class="quiz__option" data-correct>Yaoshi</button>
       </form>
       <form class="quiz__question quiz__question--hidden" id="question-3">
         <p class="quiz__question-number">Questão 3</p>
         <p class="quiz__question-text">
-          Qual Aeon percorreu o universo conectando mundos através dos Trilhos
-          Estelares antes de desaparecer misteriosamente?
+          Qual organização intergaláctica atua como a maior potência econômica
+          do universo, venerando Qlipoth, o Aeon da Preservação?
         </p>
-        <button class="quiz__option">Nous</button>
-        <button class="quiz__option">Akivili</button>
-        <button class="quiz__option">Fuli</button>
-        <button class="quiz__option">Ena</button>
+        <button class="quiz__option" data-correct>
+          Corporação da Paz Interastral (CPI)
+        </button>
+        <button class="quiz__option">Sociedade dos Gênios</button>
+        <button class="quiz__option">Aliança Xianzhou</button>
+        <button class="quiz__option">Legião Antimatéria</button>
       </form>
+
+      <div class="quiz__scoreboard quiz__scoreboard--hidden">
+        <p class="quiz__score">
+          Pontuação: <span class="quiz__score-value" id="score">0</span>
+        </p>
+      </div>
       <button
         class="quiz__start quiz__start--finish quiz__start--hidden"
         id="finish-quiz"
